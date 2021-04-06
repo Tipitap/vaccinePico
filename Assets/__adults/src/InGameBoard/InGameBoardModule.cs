@@ -140,7 +140,7 @@ namespace InGameBoard
 
         public void NextGameAudio()
         {
-            SOUND.PlayLang("next_game");
+            //SOUND.PlayLang("next_game");
         }
 
         // ************************************
@@ -332,9 +332,10 @@ namespace InGameBoard
         private bool Continue()
         {
 #if UNITY_EDITOR
-            return (Input.GetMouseButtonDown(0));
+            return (Input.GetKeyDown(KeyCode.A));
 #else
-            return Pvr_ControllerManager.controllerlink.Controller0.Trigger.PressedDown;// OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger);
+            return (Pvr_ControllerManager.controllerlink.Controller0.Touch.State);
+           // return Pvr_ControllerManager.controllerlink.Controller0.Trigger.PressedDown;// OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger);
 #endif
         }
 

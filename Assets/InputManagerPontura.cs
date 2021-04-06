@@ -20,14 +20,17 @@ public class InputManagerPontura : Singleton<InputManagerPontura>
         SWIPE_RIGHT
     }
 
-    float timerPad;
     bool padDown;
     bool gatilloDown;
     float axis;
 
+    float timer = 0;
+
     void Update()
     {
-
+        timer += Time.deltaTime;
+        if (timer < 1.5f)
+            return;
 
         ////////////////////////////////
         //  pico:
@@ -41,11 +44,11 @@ public class InputManagerPontura : Singleton<InputManagerPontura>
         }
         if (Pvr_ControllerManager.controllerlink.Controller0.App.State)
         {
-            SetNewGesto(types.PAD_DOWN);
+            SetNewGesto(types.TWO_BUTTONS_DOWN);
         }
         if (Pvr_ControllerManager.controllerlink.Controller0.Touch.State)
         {
-            SetNewGesto(types.TWO_BUTTONS_DOWN);
+            SetNewGesto(types.PAD_DOWN);
         }
         if (Pvr_ControllerManager.controllerlink.Controller1.Trigger.State)
         {
@@ -53,11 +56,11 @@ public class InputManagerPontura : Singleton<InputManagerPontura>
         }
         if (Pvr_ControllerManager.controllerlink.Controller1.App.State)
         {
-            SetNewGesto(types.PAD_DOWN);
+            SetNewGesto(types.TWO_BUTTONS_DOWN);
         }
         if (Pvr_ControllerManager.controllerlink.Controller1.Touch.State)
         {
-            SetNewGesto(types.TWO_BUTTONS_DOWN);
+            SetNewGesto(types.PAD_DOWN);
         }
         if (Pvr_ControllerManager.controllerlink.Controller0.SwipeDirection == Pvr_UnitySDKAPI.SwipeDirection.SwipeLeft)
         {
@@ -72,10 +75,8 @@ public class InputManagerPontura : Singleton<InputManagerPontura>
 
 
 
+#if UNITY_EDITOR
 
-
-        ////////////////////////////////
-        //  editor:
         if (Input.GetKeyDown(KeyCode.Space))
         {
             SetNewGesto(types.GATILLO_DOWN);
@@ -102,7 +103,7 @@ public class InputManagerPontura : Singleton<InputManagerPontura>
             return;
         }
 
-
+#endif
 
 
 
@@ -216,7 +217,7 @@ public class InputManagerPontura : Singleton<InputManagerPontura>
     }
     void SetNewGesto(types type)
     {
-        print(type);
+        timer = 0;
         this.type = type;
         OnInput(type);
     }

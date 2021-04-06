@@ -210,12 +210,13 @@ public class VoiceCommand : MonoBehaviour
 
     void Update()
     {
-
+        
         //
         //  EXTRACTION MODE
         //
         if (Input.GetKeyDown(KeyCode.E) || Pvr_ControllerManager.controllerlink.Controller0.Trigger.State)
         {
+            print("EXTRACTION MODE E");
             // holdTimer.setDelay(2f);
 
             //pontura hack para que salga del modo metralla instantaneamente:
@@ -223,8 +224,9 @@ public class VoiceCommand : MonoBehaviour
 
             holdTimer.start();
         }
-        else if (Input.GetKey(KeyCode.E) || Pvr_ControllerManager.controllerlink.Controller0.App.State)
+        else if (Input.GetKey(KeyCode.A) || Pvr_ControllerManager.controllerlink.Controller0.Touch.State)
         {
+            print("EXTRACTION MODE A");
             if (holdTimer.update())
             {
                 holdTimer.stop();

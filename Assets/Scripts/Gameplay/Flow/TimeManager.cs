@@ -102,7 +102,7 @@ public class TimeManager : Singleton<TimeManager>
 	void OnInput(InputManagerPontura.types type)
 	{
 
-        if (data != null && type == InputManagerPontura.types.PAD_DOWN && data.state != Data.states.DONE)
+        if (data != null && type == InputManagerPontura.types.GATILLO_DOWN && data.state != Data.states.DONE)
         {
             PersistentData.Instance.langSelected = false;
             ResetScene();
@@ -126,10 +126,13 @@ public class TimeManager : Singleton<TimeManager>
 			else
 				SoundFXManager.Instance.OnSoundFX ("pause");
 
-		}// else if(type == InputManager.types.PAD_HOLD)
-		//{
-          //  ResetScene ();
-		//}
+            SoundFXManager.Instance.OnSoundFX("reset");
+            UnityEngine.XR.InputTracking.Recenter();
+
+        }// else if(type == InputManager.types.PAD_HOLD)
+         //{
+         //  ResetScene ();
+         //}
     }
     
     void ResetScene()
@@ -258,14 +261,14 @@ public class TimeManager : Singleton<TimeManager>
 		return System.Array.Find (_timeSections, section => section.state == state);
 	}
 
-	void OnApplicationFocus(bool hasFocus)
-	{
-		if (PersistentData.Instance.DEBBUGER)
-			return;
+	//void OnApplicationFocus(bool hasFocus)
+	//{
+	//	if (PersistentData.Instance.DEBBUGER)
+	//		return;
 
-		//PersistentData.Instance.serverLogin.Init ();
-		masker.SetActive (true);
-		ResetScene ();
-	}
+ //       //PersistentData.Instance.serverLogin.Init ();
+ //       //masker.SetActive (false);
+ //       //ResetScene();
+	//}
 
 }

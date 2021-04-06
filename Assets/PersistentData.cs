@@ -100,4 +100,10 @@ public class PersistentData : MonoBehaviour {
                 return al.lang.ToString();
         return null;
     }
+
+    void OnApplicationFocus(bool hasFocus)
+    {
+        if(hasFocus)
+            UnityEngine.XR.InputTracking.Recenter();
+    }
 }

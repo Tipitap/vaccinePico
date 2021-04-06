@@ -34,9 +34,9 @@ public class MainGame : MonoBehaviour
     private MainGame m_Instance;
     public MainGame Instance { get { return m_Instance; } }
 
-    private static int STATE;
-    private static int SUB_STATE;
-    private static int GAME_STATE;
+    public static int STATE;
+    public static int SUB_STATE;
+    public static int GAME_STATE;
     public static int extra_state;
 
     private static SavedState savedState;

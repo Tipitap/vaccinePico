@@ -422,7 +422,7 @@ PrefabInstance:
     - target: {fileID: 114961008092855766, guid: 84b1bf466322a964fb172ebe2bb25ae9,
         type: 3}
       propertyPath: gameSettings
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114961008092855766, guid: 84b1bf466322a964fb172ebe2bb25ae9,
         type: 3}
@@ -431,6 +431,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 114048511783348736, guid: 84b1bf466322a964fb172ebe2bb25ae9,
         type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 392279800, guid: 84b1bf466322a964fb172ebe2bb25ae9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 392279802, guid: 84b1bf466322a964fb172ebe2bb25ae9, type: 3}
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
@@ -467,7 +475,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea1ca868fcb8d7441b52ede0ef853167, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  screen: 2
+  screen: 1
 --- !u!4 &1599531615
 Transform:
   m_ObjectHideFlags: 0

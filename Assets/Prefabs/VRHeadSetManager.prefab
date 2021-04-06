@@ -112,7 +112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c1373b1bff640c4c9d8db8fb4369176, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  confirmBtn: 2
+  confirmBtn: 4
 --- !u!1 &4682863301568844768
 GameObject:
   m_ObjectHideFlags: 0
@@ -243,13 +243,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4012638077614798, guid: f4d2c95a82cadba4fb259ca17b5a8404, type: 3}
-      propertyPath: m_RootOrder
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 448494, guid: f4d2c95a82cadba4fb259ca17b5a8404, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 11446018, guid: f4d2c95a82cadba4fb259ca17b5a8404, type: 3}
       propertyPath: LeftEyeCamera
