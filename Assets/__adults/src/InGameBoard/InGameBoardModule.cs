@@ -67,6 +67,7 @@ namespace InGameBoard
 
         public void Talk(int lvl = -1) // -1 == intro
         {
+            print("Talk_______________" + lvl);
             //dolphinAnimator.SetTrigger("talk");
             //SOUND.Play("fx_dolphin_0" + dolphinTalkCount);
             Parrot2.me.Talk01();

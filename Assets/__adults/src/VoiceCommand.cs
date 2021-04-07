@@ -207,15 +207,17 @@ public class VoiceCommand : MonoBehaviour
         //GameObject.FindObjectOfType<Dolphin>().LaunchAnim("attack");
         MainGame.RETURN_TO_SIMPLE_MODE();
     }
-
+    float lastTimeClicked = 0;
     void Update()
     {
-        
+        lastTimeClicked += Time.deltaTime;
+        if (lastTimeClicked < 1) return;
         //
         //  EXTRACTION MODE
         //
         if (Input.GetKeyDown(KeyCode.E) || Pvr_ControllerManager.controllerlink.Controller0.Trigger.State)
         {
+            lastTimeClicked = 0;
             print("EXTRACTION MODE E");
             // holdTimer.setDelay(2f);
 
@@ -224,8 +226,9 @@ public class VoiceCommand : MonoBehaviour
 
             holdTimer.start();
         }
-        else if (Input.GetKey(KeyCode.A) || Pvr_ControllerManager.controllerlink.Controller0.Touch.State)
+        else if (Input.GetKey(KeyCode.A) || Pvr_ControllerManager.controllerlink.Controller1.Touch.State || Pvr_ControllerManager.controllerlink.Controller0.Touch.State)
         {
+            lastTimeClicked = 0;
             print("EXTRACTION MODE A");
             if (holdTimer.update())
             {
@@ -237,19 +240,19 @@ public class VoiceCommand : MonoBehaviour
         //
         //  LANGUAGE MODE
         //
-        if (Input.GetKeyDown(KeyCode.Q) || Pvr_ControllerManager.controllerlink.Controller0.Trigger.State)
-        {
-            holdTimer.setDelay(2f);
-            holdTimer.start();
-        }
-        else if (Input.GetKey(KeyCode.Q) || Pvr_ControllerManager.controllerlink.Controller0.App.State)
-        {
-            if (holdTimer.update())
-            {
-                holdTimer.stop();
-                MainGame.OPEN_LANGUAGE_SELECTION();
-            }
-        }
+        //if (Input.GetKeyDown(KeyCode.Q) || Pvr_ControllerManager.controllerlink.Controller0.Trigger.State)
+        //{
+        //    holdTimer.setDelay(2f);
+        //    holdTimer.start();
+        //}
+        //else if (Input.GetKey(KeyCode.Q) || Pvr_ControllerManager.controllerlink.Controller0.App.State)
+        //{
+        //    if (holdTimer.update())
+        //    {
+        //        holdTimer.stop();
+        //        MainGame.OPEN_LANGUAGE_SELECTION();
+        //    }
+        //}
 
 
 #if UNITY_EDITOR

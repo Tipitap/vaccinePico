@@ -217,7 +217,8 @@ public class InputManagerPontura : Singleton<InputManagerPontura>
     }
     void SetNewGesto(types type)
     {
-        timer = 0;
+        if(type != types.SWIPE_LEFT && type != types.SWIPE_RIGHT)
+            timer = 0;
         this.type = type;
         OnInput(type);
     }

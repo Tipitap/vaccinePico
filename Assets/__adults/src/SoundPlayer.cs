@@ -134,7 +134,7 @@ public class SoundPlayer : MonoBehaviour
 
     private AudioClip GetByName(String name)
     {
-        print("name " + name);
+       // print("name " + name);
         for (int a = 0; a < clips.Length; a++)
         {
             if (clips[a].name == name)
