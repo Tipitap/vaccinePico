@@ -746,10 +746,11 @@ public class MainGame : MonoBehaviour
                                 //if (Parrot2.me.IsOnSpecialMode())
                                 if(InGameBoardModule.me.TalkFinished())
                                 {
-                                    if (InGameBoardModule.me.TalkSpecialBeQuiet(0))
+                                    //pontura nunca dice la frase en special mode.
+                                   // if (InGameBoardModule.me.TalkSpecialBeQuiet(0))
                                         timer2.setDelay(4f);
-                                    else
-                                        timer2.setDelay(0f);
+                                    //else
+                                    //    timer2.setDelay(0f);
 
                                     timer2.start();
                                     //extractionLvlCount++;
@@ -806,14 +807,14 @@ public class MainGame : MonoBehaviour
                             {
                                 if (timer2.update())
                                 {
-                                    if (Config.EXTRACTION_USE_BREATH_AUDIO)
-                                    {
-                                        if (InGameBoardModule.me.TalkSpecialBeQuiet(++extractionLvlCount))
-                                            timer2.setDelay(4f);
-                                        else
-                                            timer2.setDelay(0f);
-                                    }
-                                    else
+                                    //if (Config.EXTRACTION_USE_BREATH_AUDIO)
+                                    //{
+                                    //    if (InGameBoardModule.me.TalkSpecialBeQuiet(++extractionLvlCount))
+                                    //        timer2.setDelay(4f);
+                                    //    else
+                                    //        timer2.setDelay(0f);
+                                    //}
+                                    //else
                                         timer2.setDelay(0f);
 
                                     timer2.start();

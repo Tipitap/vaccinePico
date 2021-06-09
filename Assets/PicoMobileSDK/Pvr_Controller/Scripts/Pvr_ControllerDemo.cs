@@ -166,7 +166,7 @@ public class Pvr_ControllerDemo : MonoBehaviour
                     {
                         if (lastHit.GetComponent<Pvr_UIGraphicRaycaster>() && lastHit.transform.gameObject.activeInHierarchy && lastHit.GetComponent<Pvr_UIGraphicRaycaster>().enabled)
                         {
-                            lastHit.GetComponent<Pvr_UIGraphicRaycaster>().enabled = false;
+                          //  lastHit.GetComponent<Pvr_UIGraphicRaycaster>().enabled = false;
                         }
                     }
                     if (currentHit != null && lastHit != null && currentHit == lastHit)

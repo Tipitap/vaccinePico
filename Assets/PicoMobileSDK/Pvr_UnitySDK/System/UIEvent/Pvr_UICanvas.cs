@@ -58,7 +58,7 @@ public class Pvr_UICanvas : MonoBehaviour
         {
             customRaycaster.ignoreReversedGraphics = defaultRaycaster.ignoreReversedGraphics;
             customRaycaster.blockingObjects = defaultRaycaster.blockingObjects;
-            defaultRaycaster.enabled = false;
+         //   defaultRaycaster.enabled = false;
         }
         if (!canvas.gameObject.GetComponent<BoxCollider>())
         {

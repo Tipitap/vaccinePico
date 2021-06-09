@@ -110,7 +110,9 @@ namespace InGameBoard
             else
                 SOUND.PlayLang("special_mode_be_quiet_" + 1);
             
-            return true;*/
+            return true;
+            
+             */
 
             if (number == 1)
             {
@@ -335,7 +337,11 @@ namespace InGameBoard
 #if UNITY_EDITOR
             return (Input.GetKeyDown(KeyCode.A));
 #else
-            return (Pvr_ControllerManager.controllerlink.Controller0.Touch.State);
+            if(Pvr_ControllerManager.controllerlink.Controller0.Touch.State) 
+            return true;
+            else  if(Pvr_ControllerManager.controllerlink.Controller1.Touch.State) 
+            return true;
+            else return false;
            // return Pvr_ControllerManager.controllerlink.Controller0.Trigger.PressedDown;// OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger);
 #endif
         }

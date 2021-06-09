@@ -103,8 +103,7 @@ public class InputManagerPico : MonoBehaviour
         if (btnObj.name.Equals("Clear"))
         {
             Text t = GameObject.Find("CodeText").GetComponent<Text>();
-            if(t.text.Length>0)
-                t.text = t.text.Substring(0, t.text.Length - 1);
+            t.text = "";
             ClearBuffer();
             return;
         }

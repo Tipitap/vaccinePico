@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: PlatformSettings
   m_EditorClassIdentifier: 
   entitlementchecksimulation: 0
-  startTimeEntitlementCheck: 1
+  startTimeEntitlementCheck: 0
   appID: fa8d67b50616fd32460c17873345a482
   deviceSN: []

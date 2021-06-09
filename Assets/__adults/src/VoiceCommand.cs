@@ -215,7 +215,7 @@ public class VoiceCommand : MonoBehaviour
         //
         //  EXTRACTION MODE
         //
-        if (Input.GetKeyDown(KeyCode.E) || Pvr_ControllerManager.controllerlink.Controller0.Trigger.State)
+        if (Input.GetKeyDown(KeyCode.E) || Pvr_ControllerManager.controllerlink.Controller0.Trigger.State || Pvr_ControllerManager.controllerlink.Controller1.Trigger.State)
         {
             lastTimeClicked = 0;
             print("EXTRACTION MODE E");
@@ -226,7 +226,7 @@ public class VoiceCommand : MonoBehaviour
 
             holdTimer.start();
         }
-        else if (Input.GetKey(KeyCode.A) || Pvr_ControllerManager.controllerlink.Controller1.Touch.State || Pvr_ControllerManager.controllerlink.Controller0.Touch.State)
+        if (Input.GetKey(KeyCode.A) || Pvr_ControllerManager.controllerlink.Controller1.Touch.State || Pvr_ControllerManager.controllerlink.Controller0.Touch.State)
         {
             lastTimeClicked = 0;
             print("EXTRACTION MODE A");

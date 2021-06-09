@@ -429,6 +429,21 @@ PrefabInstance:
       propertyPath: headsetType
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114961008092855766, guid: 84b1bf466322a964fb172ebe2bb25ae9,
+        type: 3}
+      propertyPath: pauseAvailableGameAdults
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114961008092855766, guid: 84b1bf466322a964fb172ebe2bb25ae9,
+        type: 3}
+      propertyPath: Game1Available
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114961008092855766, guid: 84b1bf466322a964fb172ebe2bb25ae9,
+        type: 3}
+      propertyPath: Game2Available
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 114048511783348736, guid: 84b1bf466322a964fb172ebe2bb25ae9,
         type: 3}
       propertyPath: m_Enabled

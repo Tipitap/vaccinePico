@@ -5,6 +5,11 @@ using System;
 
 public class PersistentData : MonoBehaviour {
 
+    public bool pauseAvailableGameAdults;
+
+    public bool Game1Available;
+    public bool Game2Available;
+
     public int version;
 	public bool DEBBUGER;
 	public int num_of_vaccines;
@@ -75,6 +80,7 @@ public class PersistentData : MonoBehaviour {
     {
         VoicesManager.Instance.ChangeAvailableLang(_id, isAvailable);
     }
+
     public void SetLang(int availableLangID)
     {
         int id = 0;

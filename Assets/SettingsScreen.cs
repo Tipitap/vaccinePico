@@ -14,6 +14,10 @@ public class SettingsScreen : MonoBehaviour
     public Transform container;
     int gameID;
 
+    public UnityEngine.UI.Toggle game1Toggle;
+    public UnityEngine.UI.Toggle game2Toggle;
+    public UnityEngine.UI.Toggle game2_pauseAvailable_Toggle;
+
     void Start()
     {
         string version = Application.version;
@@ -42,6 +46,10 @@ public class SettingsScreen : MonoBehaviour
 
     public void OnStartGame(int gameID)
     {
+        PersistentData.Instance.Game1Available = game1Toggle.isOn;
+        PersistentData.Instance.Game2Available = game2Toggle.isOn;
+        PersistentData.Instance.pauseAvailableGameAdults = game2_pauseAvailable_Toggle.isOn;
+
         this.gameID = gameID;
 
         for (int a = 0; a < buttons.Count; a++)
@@ -57,19 +65,24 @@ public class SettingsScreen : MonoBehaviour
         }
 
         debbugField.text = "Loading...";
-        Invoke("Delayed", 2);
+        Invoke("Delayed", 1);
     }
     void Delayed()
     {
-        if (gameID == 0)
+        if (gameID == 0 && PersistentData.Instance.Game1Available)
         {
             PersistentData.Instance.gameSettings = PersistentData.GameSettings.Kids;
             Events.LoadScene("Kids");
         }
-        else
+        else if (PersistentData.Instance.Game2Available)
         {
+            
             PersistentData.Instance.gameSettings = PersistentData.GameSettings.Adults;
             Events.LoadScene("Adults");
+        }
+        else
+        {
+            debbugField.text = "Game not available";
         }
            
        // Events.LoadScene("LangSelector");

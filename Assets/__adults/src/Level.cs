@@ -145,7 +145,8 @@ public class Level
 
     private static void AddSpecial()
     {
-        LEVELS.Add(CreateSpecialLvl(10000));
+        if(PersistentData.Instance.pauseAvailableGameAdults)
+            LEVELS.Add(CreateSpecialLvl(10000));
     }
 
     private static Level Create(GMode mode, ColorMode colorMode, KillMode killMode, int fixedShots, bool respawnAfterCompleteAll, int target, RingPosition ringPosition, RingDistance ringDistance, bool specialEndMode, int glowInSeconds, ExtraCondition extraCondition, CountMode countMode, LevelKind levelKind, RingNumberMode ringNumbers)

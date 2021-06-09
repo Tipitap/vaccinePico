@@ -6,9 +6,9 @@ public class GotoScript : MonoBehaviour
 {
     void Start()
     {
-        if(PersistentData.Instance.gameSettings == PersistentData.GameSettings.Adults)
+        if (PersistentData.Instance.gameSettings == PersistentData.GameSettings.Adults && PersistentData.Instance.Game2Available)
             Events.LoadScene("Adults");
-        else
+        else if(PersistentData.Instance.Game1Available)
             Events.LoadScene("Kids");
     }
 }

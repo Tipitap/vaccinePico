@@ -161,7 +161,7 @@ PlayerSettings:
     tvOS: com.unity3d.vrstandardassets
   buildNumber:
     iOS: 0
-  AndroidBundleVersionCode: 28
+  AndroidBundleVersionCode: 29
   AndroidMinSdkVersion: 23
   AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 0
