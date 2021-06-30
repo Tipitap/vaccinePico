@@ -7,6 +7,8 @@ using System.IO;
 
 public class VoicesManager : MonoBehaviour
 {
+   // public bool loadOnInit;
+
     public string lang;
 
     public string[] languages;
@@ -16,7 +18,8 @@ public class VoicesManager : MonoBehaviour
     public class AvailableLang
     {
         public string lang;
-        public bool available; 
+        public bool available;
+        public int langID;        
     }
   //  public Games games;
     public AudioSource audioSource;
@@ -40,7 +43,7 @@ public class VoicesManager : MonoBehaviour
 
     public void SetLang(string lang)
     {
-        this.lang = lang.ToLower();
+        this.lang = lang;
     }
     void Awake()
     {
@@ -49,7 +52,6 @@ public class VoicesManager : MonoBehaviour
     }
     private void Start()
     {
-        if (lang == "") lang = "en";
         audioSource = GetComponent<AudioSource>();
         DontDestroyOnLoad(this);
         ////#if UNITI_EDITOR
@@ -108,32 +110,15 @@ public class VoicesManager : MonoBehaviour
         SetAvailableLang(0, PlayerPrefs.GetInt("lang_en"));
         SetAvailableLang(1, PlayerPrefs.GetInt("lang_es"));
         SetAvailableLang(2, PlayerPrefs.GetInt("lang_ar"));
-        SetAvailableLang(3, PlayerPrefs.GetInt("lang_se"));
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
-        if (
-                PlayerPrefs.GetInt("lang_en") == 0
-            && PlayerPrefs.GetInt("lang_es") == 0
-            && PlayerPrefs.GetInt("lang_ar") == 0
-            && PlayerPrefs.GetInt("lang_se") == 0
-            )
-        {
-            lang = "en";
-            SetAvailableLang(0, 1); // setea el ingles por defecto
-        }
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
     }
     public void ChangeAvailableLang(int arrayID, bool available)
     {
-        print("arrayID: " + arrayID + " available: " + available);
-
         string langName = "";
         switch (arrayID)
         {
-            case 3: langName = "lang_se"; break;
+            case 0: langName = "lang_en"; break;
             case 1: langName = "lang_es"; break;
-            case 2: langName = "lang_ar"; break;
-            default: langName = "lang_en"; break;
+            default: langName = "lang_ar"; break;
         }
         int value = 0;
         if (available) value = 1;
@@ -157,7 +142,6 @@ public class VoicesManager : MonoBehaviour
         int lang_en = PlayerPrefs.GetInt("lang_en");
         int lang_es = PlayerPrefs.GetInt("lang_es");
         int lang_ar = PlayerPrefs.GetInt("lang_ar");
-        int lang_se = PlayerPrefs.GetInt("lang_se");
 
         if (lang_en == 0)
             VoicesManager.Instance.availableLangs[0].available = false;
@@ -173,11 +157,6 @@ public class VoicesManager : MonoBehaviour
             VoicesManager.Instance.availableLangs[2].available = false;
         else
             VoicesManager.Instance.availableLangs[2].available = true;
-
-        if (lang_se == 0)
-            VoicesManager.Instance.availableLangs[3].available = false;
-        else
-            VoicesManager.Instance.availableLangs[3].available = true;
 
         foreach (VoicesManager.AvailableLang al in VoicesManager.Instance.availableLangs)
         {
@@ -207,13 +186,15 @@ public class VoicesManager : MonoBehaviour
     }
     AudioClip GetClip(AudioClipsByLang[] audioClipsByLangs, string lang, string audioName)
     {
+        Debug.Log("audioName " + audioName + " lalangIDg: " + lang);
         foreach (AudioClipsByLang audioClipsByLang in audioClipsByLangs)
         {
             if (audioClipsByLang.lang == lang)
             {
                 foreach (AudioClip ac in audioClipsByLang.clips)
                 {
-                    if(ac.name == audioName || ac.name.ToUpper() == audioName.ToUpper())
+                   // print(ac.name);
+                    if(ac.name == audioName)
                     {
                         return ac;                       
                     }

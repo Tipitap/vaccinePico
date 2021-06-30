@@ -143,7 +143,7 @@ namespace InGameBoard
 
         public void NextGameAudio()
         {
-            //SOUND.PlayLang("next_game");
+            SOUND.PlayLang("next_game");
         }
 
         // ************************************

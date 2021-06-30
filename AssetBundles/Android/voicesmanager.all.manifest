@@ -1,0 +1,26 @@
+ManifestFileVersion: 0
+CRC: 1377558909
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 0b0504eb7f6f3d9d9b46de8d3c9829dd
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 895e34e20f75abc9607f198600549471
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 82
+  Script: {instanceID: 0}
+- Class: 83
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: 7c829dce8cce5574da6e55a3adfa242c, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+Assets:
+- Assets/Voices/voicesmanager.prefab
+Dependencies: []

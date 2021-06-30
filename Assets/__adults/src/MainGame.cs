@@ -139,11 +139,34 @@ public class MainGame : MonoBehaviour
         SUB_STATE =     SubState.SetupAll;
         GAME_STATE =    0;
         extra_state =   0;
-        
+
+        InputManagerPontura.Instance.OnInput += OnInput;
         //VRLauncher.me.SetAutoRelaunch(false);
     }
-  
-    public  float timerNum = 0;
+    void ResetTimer()
+    {
+        lastTimeClicked = Time.time;
+    }
+    float lastTimeClicked = 0;
+    void OnInput(InputManagerPontura.types type)
+    {
+        //print("GAME_STATE: " + GAME_STATE + " extra_state" + extra_state + "  state = " + STATE + "  SUB_STATE " + SUB_STATE + "InGameBoardModule.me.HasFinished(): " + InGameBoardModule.me.HasFinished());
+        //print("OnInput " + type + "     vaccines: " + GAME.vaccines + "  GAME.LEVEL_NUMBER: " + GAME.LEVEL_NUMBER);
+        if (Time.time > lastTimeClicked + 15)
+        {           
+                switch (type)
+                {
+                    case InputManagerPontura.types.PAD_DOWN:
+                        ResetTimer();
+                        if (GAME_STATE == 3)
+                            RETURN_TO_SIMPLE_MODE();
+                        else if (GAME_STATE < 4 && GAME.vaccines <= GAME.LEVEL_NUMBER)
+                            JUMP_TO_END_GAME();
+                    break;
+            }
+        }
+    }
+    public float timerNum = 0;
     //void OnInput(InputManagerPontura.types type)
     //{
     //    if (timerNum > 2)
@@ -188,7 +211,7 @@ public class MainGame : MonoBehaviour
     //}
     void Update()
     {
-     //   print("GAME_STATE: " + GAME_STATE + " extra_state" +  extra_state + "  state = " + STATE + "  SUB_STATE " + SUB_STATE);
+        //print("GAME_STATE: " + GAME_STATE + " extra_state" +  extra_state + "  state = " + STATE + "  SUB_STATE " + SUB_STATE);
 
         timerNum += Time.deltaTime;
         //if (Input.GetKeyDown(KeyCode.J))
@@ -681,7 +704,7 @@ public class MainGame : MonoBehaviour
                             if (extra_state == 0)
                             {
                                 Debug.Log("LEVEL COMPLETE  CURRENT LEVEL NUMBER: " + GAME.LEVEL_NUMBER + " Vaccines: " + GAME.vaccines);
-
+                                ResetTimer();
                                 if (GAME.LEVEL_NUMBER == GAME.vaccines)
                                 {
                                     JUMP_TO_END_GAME();
@@ -979,7 +1002,8 @@ public class MainGame : MonoBehaviour
         // Already in Special Mode
         if (GAME_STATE == 3)
         {
-            RETURN_TO_SIMPLE_MODE();
+            OLD_RETURN_TO_SIMPLE_MODE();
+            //RETURN_TO_SIMPLE_MODE();
         }
         else
         {
@@ -1052,7 +1076,8 @@ public class MainGame : MonoBehaviour
         Parrot2.me.RESET_ANIMATOR();
 
         //Parrot2.me.BACK();
-        InGameBoardModule.me.GameFinishedAudio();
+        InGameBoardModule.me.NextGameAudio();
+        //pontura: InGameBoardModule.me.GameFinishedAudio();
         //Environment.me.PlayAmbientEndGame();
 
         SPECIAL_MODE_COMPLETE = true;

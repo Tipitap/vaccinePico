@@ -106,8 +106,7 @@ public class ServerLogin : MonoBehaviour {
 		}
 	}
 	void CheckExpirationValue()
-	{
-      
+	{      
 		expired = CheckExpiration ();
 
         print("CheckExpirationValue " + expired);
@@ -270,7 +269,6 @@ public class ServerLogin : MonoBehaviour {
 		if (hs_post.error != null)
 		{
 			SetDebbugText("No internet connection found.Please connect to the internet and try again.");
-
             GotoLogin ();
 		}else if(hs_post.text == "error")
 		{

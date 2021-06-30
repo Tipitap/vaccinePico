@@ -3,7 +3,8 @@ guid: af8f633b22ea4eb42a5f54897ae30dee
 labels:
 - Vegetation
 - CoconutPalmTreePack
-NativeFormatImporter:
+PrefabImporter:
+  externalObjects: {}
   userData: 
-  assetBundleName: coconut_palm_tree
+  assetBundleName: 
   assetBundleVariant: 
