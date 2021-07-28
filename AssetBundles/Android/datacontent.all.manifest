@@ -1,0 +1,26 @@
+ManifestFileVersion: 0
+CRC: 3158389174
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 6c8238923e5b62a59cf679c01be41a72
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 0190dd93b94d8b543dbe5fbd41796053
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: 3bbcb8980b12b3f44985519750c443c0, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+Assets:
+- Assets/_assetBundles/datacontent.prefab
+Dependencies: []

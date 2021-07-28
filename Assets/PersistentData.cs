@@ -78,11 +78,13 @@ public class PersistentData : MonoBehaviour {
     
     public void AddAvailableLangByID(int _id, bool isAvailable)
     {
+        Debug.Log("____________Available lang: " + _id + " isAvailable : " +  isAvailable);
         VoicesManager.Instance.ChangeAvailableLang(_id, isAvailable);
     }
 
     public void SetLang(int availableLangID)
     {
+        Debug.Log("____________SetLang: " + availableLangID);
         int id = 0;
         foreach (VoicesManager.AvailableLang al in VoicesManager.Instance.availableLangs)
         {

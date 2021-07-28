@@ -64,6 +64,7 @@ public class AssetsBundleLoader : MonoBehaviour
         dataPaths = new List<string>();
 
         dataPaths.Add("voicesmanager.all");
+        dataPaths.Add("datacontent.all");
 
         totalFirstBundles = dataPaths.Count;
         bundles = new Dictionary<string, AssetBundle>();
@@ -95,34 +96,59 @@ public class AssetsBundleLoader : MonoBehaviour
         {
             isFirstTime = false;
         }
-
-        Debug.Log("Vuelve a Bajar: " + isFirstTime + "   mainBundle " + mainBundle + "   dataPaths: " + dataPaths);
         this.onSuccess = onSuccess;
 
-        using (UnityWebRequest request = UnityWebRequestAssetBundle.GetAssetBundle(url + mainBundlePath))
-        {
-            Debug.Log("Loading from url : " + url + mainBundlePath);
-            AsyncOperation op = request.SendWebRequest();
-            while (!op.isDone)
-            {
-                downloadProgress = request.downloadProgress;
-                downloadedBytes = request.downloadedBytes;
-                yield return new WaitForEndOfFrame();
-            }
-            Debug.Log("Loading Manifest done");
-            if (request.isNetworkError || request.isHttpError)
-            {
-                Debug.Log(request.error);
-            }
-            else
-            {
-                mainBundle = DownloadHandlerAssetBundle.GetContent(request);
-                manifest = mainBundle.LoadAsset<AssetBundleManifest>("AssetBundleManifest");
+        //Debug.Log("Vuelve a Bajar: " + isFirstTime + "   mainBundle " + mainBundle + "   dataPaths: " + dataPaths);
+        //this.onSuccess = onSuccess;
 
-                StartCoroutine(LoadBundlesFromManifest());
+        //using (UnityWebRequest request = UnityWebRequestAssetBundle.GetAssetBundle(url + mainBundlePath))
+        //{
+        //    Debug.Log("Loading from url : " + url + mainBundlePath);
+        //    AsyncOperation op = request.SendWebRequest();
+        //    while (!op.isDone)
+        //    {
+        //        downloadProgress = request.downloadProgress;
+        //        downloadedBytes = request.downloadedBytes;
+        //        yield return new WaitForEndOfFrame();
+        //    }
+        //    Debug.Log("Loading Manifest done");
+        //    if (request.isNetworkError || request.isHttpError)
+        //    {
+        //        Events.OnKeyboardText("Please connect your VR headset to the internet for initial set-up.");
+        //        Debug.Log(request.error);
+        //    }
+        //    else
+        //    {
+        //        mainBundle = DownloadHandlerAssetBundle.GetContent(request);
+        //        manifest = mainBundle.LoadAsset<AssetBundleManifest>("AssetBundleManifest");
+
+        //        StartCoroutine(LoadBundlesFromManifest());
+        //    }
+        //}
+        //mainBundle.Unload(false);
+
+
+
+
+
+        while (!Caching.ready)
+            yield return null;
+
+
+        using (var www = WWW.LoadFromCacheOrDownload(url + mainBundlePath, 5))
+        {
+            yield return www;
+            if (!string.IsNullOrEmpty(www.error))
+            {
+                Events.OnKeyboardText("Please connect your VR headset to the internet for initial set-up.");
+                Debug.Log(www.error);
+                yield return null;
             }
+            mainBundle = www.assetBundle;
+            manifest = mainBundle.LoadAsset<AssetBundleManifest>("AssetBundleManifest");
+            StartCoroutine(LoadBundlesFromManifest());
+            //mainBundle.Unload(false);
         }
-        mainBundle.Unload(false);
     }
 
 
@@ -146,7 +172,8 @@ public class AssetsBundleLoader : MonoBehaviour
             if (isFirstTime)
             {
                 CurrentPack = key;
-                yield return DownloadAndCacheAssetBundle(key, hash, OnLoaded);
+                //  yield return DownloadAndCacheAssetBundle(key, hash, OnLoaded);
+                yield return DownloadAndCacheAssetBundle(key, OnLoaded);
             }
         }
         if (!isFirstTime)
@@ -167,7 +194,13 @@ public class AssetsBundleLoader : MonoBehaviour
     int loadedParts = 0;
     void OnLoaded(bool isLoaded)
     {
-        onSuccess("ok");
+      //  onSuccess("ok");
+        loadedParts++;
+        print("dataPaths: " + dataPaths.Count);
+        if (loadedParts >= dataPaths.Count)
+        {
+            onSuccess("ok");
+        }
         //loadedParts++;
         //if (state == states.FIRST_BUNDLES)
         //{
@@ -188,31 +221,58 @@ public class AssetsBundleLoader : MonoBehaviour
         //    }
         //}
     }
-    IEnumerator DownloadAndCacheAssetBundle(string uri, Hash128 hash, System.Action<bool> OnLoaded)
+    //IEnumerator DownloadAndCacheAssetBundle(string uri, Hash128 hash, System.Action<bool> OnLoaded)
+    //{
+    //    string realURL = url + uri;
+    //    Debug.Log("Load: " + realURL);
+    //    UnityWebRequest request = UnityWebRequestAssetBundle.GetAssetBundle(realURL, hash); //, hash, 0);
+    //    request.SendWebRequest();
+    //    while (!request.isDone)
+    //    {
+    //        downloadProgress = request.downloadProgress;
+    //        downloadedBytes = request.downloadedBytes;
+    //        yield return new WaitForEndOfFrame();
+    //    }
+    //    if (request.isNetworkError || request.isHttpError)
+    //    {
+    //        Debug.Log("Error downloading assetBundle: " + realURL);
+    //       // Events.OpenStandardSignal(Data.Instance.ResetAll, "No internet access, try again later");
+    //        yield break;
+    //    }
+    //    else
+    //    {
+    //        AssetBundle bundle = DownloadHandlerAssetBundle.GetContent(request);
+    //        if (bundles == null)
+    //            bundles = new Dictionary<string, AssetBundle>();
+    //        bundles.Add(uri, bundle);
+
+    //        OnLoaded(true);
+    //    }
+    //}
+    IEnumerator DownloadAndCacheAssetBundle(string uri, System.Action<bool> OnLoaded)
     {
+        while (!Caching.ready)
+            yield return null;
+
         string realURL = url + uri;
-        Debug.Log("Load: " + realURL);
-        UnityWebRequest request = UnityWebRequestAssetBundle.GetAssetBundle(realURL, hash); //, hash, 0);
-        request.SendWebRequest();
-        while (!request.isDone)
+
+        using (var www = WWW.LoadFromCacheOrDownload(realURL, 5))
         {
-            downloadProgress = request.downloadProgress;
-            downloadedBytes = request.downloadedBytes;
-            yield return new WaitForEndOfFrame();
-        }
-        if (request.isNetworkError || request.isHttpError)
-        {
-            Debug.Log("Error downloading assetBundle: " + realURL);
-           // Events.OpenStandardSignal(Data.Instance.ResetAll, "No internet access, try again later");
-            yield break;
-        }
-        else
-        {
-            AssetBundle bundle = DownloadHandlerAssetBundle.GetContent(request);
+            yield return www;
+            if (!string.IsNullOrEmpty(www.error))
+            {
+                Debug.Log(www.error);
+                yield return null;
+            }
+            var myLoadedAssetBundle = www.assetBundle;
+
+            //var asset = myLoadedAssetBundle.mainAsset;
+
+           // AssetBundle bundle = DownloadHandlerAssetBundle.GetContent(request);
             if (bundles == null)
                 bundles = new Dictionary<string, AssetBundle>();
-            bundles.Add(uri, bundle);
-
+            bundles.Add(uri, www.assetBundle);
+            print(uri + " name: "  + myLoadedAssetBundle.name);
             OnLoaded(true);
         }
     }

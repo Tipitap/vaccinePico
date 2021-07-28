@@ -216,12 +216,13 @@ public class MainMenuPanel : MonoBehaviour
                 {
                     PersistentData.Instance.gameSettings = PersistentData.GameSettings.Adults;
                     Events.LoadScene("Adults");
+                    InputManagerPontura.Instance.OnInput -= OnInput;
                 }
-                else
+                else if (PersistentData.Instance.Game1Available)
+                {
                     Events.LoadScene("Kids");
-                
-
-                InputManagerPontura.Instance.OnInput -= OnInput;
+                    InputManagerPontura.Instance.OnInput -= OnInput;
+                }
                 break;
         }
         

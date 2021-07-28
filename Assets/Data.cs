@@ -187,7 +187,7 @@ public class Data : MonoBehaviour {
         case InputManagerPontura.types.TWO_BUTTONS_DOWN:
             if (timer > 1)
             {
-                if (PersistentData.Instance.Game2Available)
+                if (state != states.DONE && PersistentData.Instance.Game2Available)
                 {
                     PersistentData.Instance.gameSettings = PersistentData.GameSettings.Adults;
                     Events.LoadScene("Adults");

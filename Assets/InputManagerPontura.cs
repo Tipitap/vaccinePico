@@ -48,7 +48,25 @@ public class InputManagerPontura : Singleton<InputManagerPontura>
         }
         if (Pvr_ControllerManager.controllerlink.Controller0.Touch.State)
         {
-            SetNewGesto(types.PAD_DOWN);
+            axis = Pvr_ControllerManager.controllerlink.Controller0.TouchPadPosition.x;
+            if (axis > 150)
+                SetNewGesto(types.SWIPE_RIGHT);
+            else if (axis < 50)
+                SetNewGesto(types.SWIPE_LEFT);
+            else
+                SetNewGesto(types.PAD_DOWN);
+            Debug.Log("PAD UP 1 axis:" + axis);
+        }
+        if (Pvr_ControllerManager.controllerlink.Controller1.Touch.State)
+        {
+            axis = Pvr_ControllerManager.controllerlink.Controller0.TouchPadPosition.x;
+            if (axis > 150)
+                SetNewGesto(types.SWIPE_RIGHT);
+            else if (axis < 50)
+                SetNewGesto(types.SWIPE_LEFT);
+            else
+                SetNewGesto(types.PAD_DOWN);
+            Debug.Log("PAD UP 1 axis:" + axis);
         }
         if (Pvr_ControllerManager.controllerlink.Controller1.Trigger.State)
         {
@@ -58,18 +76,27 @@ public class InputManagerPontura : Singleton<InputManagerPontura>
         {
             SetNewGesto(types.TWO_BUTTONS_DOWN);
         }
-        if (Pvr_ControllerManager.controllerlink.Controller1.Touch.State)
-        {
-            SetNewGesto(types.PAD_DOWN);
-        }
-        if (Pvr_ControllerManager.controllerlink.Controller0.SwipeDirection == Pvr_UnitySDKAPI.SwipeDirection.SwipeLeft)
-        {
-            SetNewGesto(types.SWIPE_LEFT);
-        }
-        else if (Pvr_ControllerManager.controllerlink.Controller0.SwipeDirection == Pvr_UnitySDKAPI.SwipeDirection.SwipeRight)
-        {
-            SetNewGesto(types.SWIPE_RIGHT);
-        }
+      
+        //if (Pvr_ControllerManager.controllerlink.Controller0.SwipeDirection == Pvr_UnitySDKAPI.SwipeDirection.SwipeLeft)
+        //{
+        //    SetNewGesto(types.SWIPE_LEFT);
+        //}
+        //else if (Pvr_ControllerManager.controllerlink.Controller0.SwipeDirection == Pvr_UnitySDKAPI.SwipeDirection.SwipeRight)
+        //{
+        //    SetNewGesto(types.SWIPE_RIGHT);
+        //}
+
+        /////////////////////Swipe
+        ///
+        /// 
+       
+       
+
+
+
+
+
+
 
 
 
@@ -217,7 +244,7 @@ public class InputManagerPontura : Singleton<InputManagerPontura>
     }
     void SetNewGesto(types type)
     {
-        if(type != types.SWIPE_LEFT && type != types.SWIPE_RIGHT)
+       // if(type != types.SWIPE_LEFT && type != types.SWIPE_RIGHT)
             timer = 0;
         this.type = type;
         OnInput(type);

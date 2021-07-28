@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 1377558909
+CRC: 3388864228
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 0b0504eb7f6f3d9d9b46de8d3c9829dd
+    Hash: 38a139b0e8922add9830eaf05b34cf63
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 895e34e20f75abc9607f198600549471
+    Hash: 87800028dfd9fffdac917918c342bebf
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -22,5 +22,5 @@ ClassTypes:
 - Class: 115
   Script: {instanceID: 0}
 Assets:
-- Assets/Voices/voicesmanager.prefab
+- Assets/_assetBundles/voicesmanager.prefab
 Dependencies: []

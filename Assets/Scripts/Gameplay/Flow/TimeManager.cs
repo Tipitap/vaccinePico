@@ -101,7 +101,12 @@ public class TimeManager : Singleton<TimeManager>
 	}
 	void OnInput(InputManagerPontura.types type)
 	{
-
+        if (type == InputManagerPontura.types.TWO_BUTTONS_DOWN)
+        {
+            PersistentData.Instance.langSelected = false;
+            ResetScene();
+            return;
+        }
         if (data != null && type == InputManagerPontura.types.GATILLO_DOWN && data.state != Data.states.DONE)
         {
             PersistentData.Instance.langSelected = false;

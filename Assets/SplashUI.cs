@@ -29,6 +29,7 @@ public class SplashUI : MonoBehaviour {
         {
            // DestroyImmediate(VoicesManager.Instance.gameObject);
             PersistentData.Instance.assetsBundleLoader.GetAsset("voicesmanager.all", "voicesmanager");
+            PersistentData.Instance.assetsBundleLoader.GetAsset("datacontent.all", "datacontent");
         }
         Debug.Log("AssetsBundle Loaded " + result);
         PersistentData.Instance.serverLogin.Init();

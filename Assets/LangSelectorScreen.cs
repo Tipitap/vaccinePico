@@ -71,7 +71,7 @@ public class LangSelectorScreen : MonoBehaviour
     }
     void SetField()
     {
-        field.text = VoicesManager.Instance.lang.ToString();
+        field.text = VoicesManager.Instance.GetLangName();
     }
     void GoToGame()
     {

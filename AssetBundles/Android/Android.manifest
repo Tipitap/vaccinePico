@@ -1,7 +1,10 @@
 ManifestFileVersion: 0
-CRC: 4194600002
+CRC: 1815301648
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
       Name: voicesmanager.all
+      Dependencies: {}
+    Info_1:
+      Name: datacontent.all
       Dependencies: {}

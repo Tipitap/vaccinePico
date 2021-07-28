@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class SettingsScreen : MonoBehaviour
 {
+    public Image logo;
     public Text versionCodeField;
     public Text deviceName;
     public Text expirationDate;
@@ -20,11 +21,18 @@ public class SettingsScreen : MonoBehaviour
 
     void Start()
     {
+        Sprite logoSprite = DataContent.Instance.GetLogoByUser();
+        if (logoSprite != null)
+            logo.sprite = logoSprite;
+        else
+            logo.enabled = false;
+
         string version = Application.version;
         if(version != null)
              versionCodeField.text = "v " + version;
 
-        deviceName.text = "Device name: " + PersistentData.Instance.serverLogin.deviceName;
+        deviceName.text = "";
+      //  deviceName.text = "Device name: " + PersistentData.Instance.serverLogin.deviceName;
 
         expirationDate.text = "Expiration date: " + PersistentData.Instance.serverLogin.expiredDay;
         expirationDate.text += "/" + PersistentData.Instance.serverLogin.expiredMonth;
@@ -35,7 +43,7 @@ public class SettingsScreen : MonoBehaviour
         foreach(VoicesManager.AvailableLang al in VoicesManager.Instance.availableLangs)
         { 
             UnityEngine.UI.Toggle t = Instantiate(toggleButton);
-            t.GetComponent<ToogleCustom>().Init(al.lang, al.available);
+            t.GetComponent<ToogleCustom>().Init(al.langName, al.available);
             t.transform.SetParent(container);
             t.transform.localScale = Vector3.one;
             t.transform.localEulerAngles = Vector3.zero;

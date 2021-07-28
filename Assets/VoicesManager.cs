@@ -17,6 +17,7 @@ public class VoicesManager : MonoBehaviour
     [Serializable]
     public class AvailableLang
     {
+        public string langName;
         public string lang;
         public bool available;
         public int langID;        
@@ -49,6 +50,14 @@ public class VoicesManager : MonoBehaviour
     {
         Instance = this;
         SetSavedLangs();
+    }
+    public string GetLangName()
+    {
+        foreach (AvailableLang l in availableLangs)
+            if (l.lang == lang)
+                return l.langName;
+
+        return lang;
     }
     private void Start()
     {
@@ -110,15 +119,17 @@ public class VoicesManager : MonoBehaviour
         SetAvailableLang(0, PlayerPrefs.GetInt("lang_en"));
         SetAvailableLang(1, PlayerPrefs.GetInt("lang_es"));
         SetAvailableLang(2, PlayerPrefs.GetInt("lang_ar"));
+        SetAvailableLang(3, PlayerPrefs.GetInt("lang_se"));
     }
     public void ChangeAvailableLang(int arrayID, bool available)
     {
         string langName = "";
         switch (arrayID)
-        {
-            case 0: langName = "lang_en"; break;
+        {            
             case 1: langName = "lang_es"; break;
-            default: langName = "lang_ar"; break;
+            case 2: langName = "lang_ar"; break;
+            case 3: langName = "lang_se"; break;
+            default: langName = "lang_en"; break;
         }
         int value = 0;
         if (available) value = 1;
@@ -142,6 +153,7 @@ public class VoicesManager : MonoBehaviour
         int lang_en = PlayerPrefs.GetInt("lang_en");
         int lang_es = PlayerPrefs.GetInt("lang_es");
         int lang_ar = PlayerPrefs.GetInt("lang_ar");
+        int lang_se = PlayerPrefs.GetInt("lang_se");
 
         if (lang_en == 0)
             VoicesManager.Instance.availableLangs[0].available = false;
@@ -157,6 +169,11 @@ public class VoicesManager : MonoBehaviour
             VoicesManager.Instance.availableLangs[2].available = false;
         else
             VoicesManager.Instance.availableLangs[2].available = true;
+
+        if (lang_se == 0)
+            VoicesManager.Instance.availableLangs[3].available = false;
+        else
+            VoicesManager.Instance.availableLangs[3].available = true;
 
         foreach (VoicesManager.AvailableLang al in VoicesManager.Instance.availableLangs)
         {

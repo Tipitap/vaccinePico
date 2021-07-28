@@ -154,7 +154,8 @@ public class ServerLogin : MonoBehaviour {
 	{
 		CancelInvoke ();
 		if (usernameInserted == "") {
-			usernameInserted = text;
+            PlayerPrefs.SetString("username",  usernameInserted.ToLower());
+            usernameInserted = text;
 			LoadScene("001_Password", 0);
 		} else if (passwordInserted == "") {
 			passwordInserted = text;
@@ -168,7 +169,7 @@ public class ServerLogin : MonoBehaviour {
 		StartCoroutine (checkInternetConnection ());
 
 		if(!hasInternet)
-			SetDebbugText ("No internet connection, please connect your device and re-open the app");
+			SetDebbugText ("Please connect your VR headset to the internet for initial set-up.");
 		else
 			SetDebbugText ("Internet connected!");
 
@@ -205,7 +206,7 @@ public class ServerLogin : MonoBehaviour {
         Debug.Log("Do the Login...................... hs_post.error " + hs_post.error );
         if (hs_post.error != null)
 		{
-			SetDebbugText("No internet connection found. Please connect to the internet and try again.");
+			SetDebbugText("Please connect your VR headset to the internet for initial set-up.");
 			GotoLogin ();
 		}else
 		{
@@ -268,7 +269,7 @@ public class ServerLogin : MonoBehaviour {
 
 		if (hs_post.error != null)
 		{
-			SetDebbugText("No internet connection found.Please connect to the internet and try again.");
+			SetDebbugText("Please connect your VR headset to the internet for initial set-up.");
             GotoLogin ();
 		}else if(hs_post.text == "error")
 		{
@@ -355,7 +356,7 @@ public class ServerLogin : MonoBehaviour {
 
 		if (hs_post.error != null)
 		{
-			SetDebbugText("No internet connection found. Please connect to the internet and try again.");
+			SetDebbugText("Please connect your VR headset to the internet for initial set-up.");
             GotoLogin ();
 		} else if (hs_post.text == "ok")
 		{
