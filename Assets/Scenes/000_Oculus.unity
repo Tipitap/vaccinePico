@@ -476,10 +476,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 708197253, guid: 84b1bf466322a964fb172ebe2bb25ae9, type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 225221603}
     - target: {fileID: 392279800, guid: 84b1bf466322a964fb172ebe2bb25ae9, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -488,6 +484,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 708197253, guid: 84b1bf466322a964fb172ebe2bb25ae9, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 225221603}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 84b1bf466322a964fb172ebe2bb25ae9, type: 3}
 --- !u!1 &612741594
@@ -608,8 +608,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: -30, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 7.6, y: 444}
-  m_SizeDelta: {x: 520.9, y: 151.05}
+  m_AnchoredPosition: {x: 0, y: 451.6}
+  m_SizeDelta: {x: 306.5, y: 166.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!111 &963282736
 Animation:
@@ -642,7 +642,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1133352647
 RectTransform:
   m_ObjectHideFlags: 0
